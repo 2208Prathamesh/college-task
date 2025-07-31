@@ -1,0 +1,148 @@
+a)
+Write a program
+that uses functions
+to perform the following operations on singly linked list: i) Creation ii) Insertion iii) Deletion
+iv) Traversal
+
+C++ CODE
+#include <iostream>
+using namespace std;
+
+// Node class
+class Node {
+public:
+    int data;
+    Node* next;
+    Node(int val) : data(val), next(nullptr) {}
+};
+
+// SinglyLinkedList class
+class SinglyLinkedList {
+private:
+    Node* head;
+
+public:
+    SinglyLinkedList() : head(nullptr) {}
+    ~SinglyLinkedList() {
+        while (head) {
+            Node* tmp = head;
+            head = head->next;
+            delete tmp;
+        }
+    }
+
+    // 1. Creation & insertion at end
+    void append(int val) {
+        Node* newNode = new Node(val);
+        if (!head) {
+            head = newNode;
+        } else {
+            Node* cur = head;
+            while (cur->next) cur = cur->next;
+            cur->next = newNode;
+        }
+    }
+
+    // 2. Insertion at beginning
+    void insertAtBeginning(int val) {
+        Node* newNode = new Node(val);
+        newNode->next = head;
+        head = newNode;
+    }
+
+    // Insertion at specific position (1-based)
+    void insertAtPosition(int val, int pos) {
+        if (pos <= 1) {
+            insertAtBeginning(val);
+            return;
+        }
+        Node* cur = head;
+        for (int i = 1; i < pos - 1 && cur; ++i) {
+            cur = cur->next;
+        }
+        if (!cur) {
+            cout << "Position out of bounds.\n";
+            return;
+        }
+        Node* newNode = new Node(val);
+        newNode->next = cur->next;
+        cur->next = newNode;
+    }
+
+    // 3. Deletion from beginning
+    void deleteFromBeginning() {
+        if (!head) return;
+        Node* tmp = head;
+        head = head->next;
+        delete tmp;
+    }
+
+    // Deletion from end
+    void deleteFromEnd() {
+        if (!head) return;
+        if (!head->next) {
+            delete head;
+            head = nullptr;
+            return;
+        }
+        Node* cur = head;
+        while (cur->next->next) cur = cur->next;
+        delete cur->next;
+        cur->next = nullptr;
+    }
+
+    // Deletion at specific position (1-based)
+    void deleteAtPosition(int pos) {
+        if (!head) return;
+        if (pos == 1) {
+            deleteFromBeginning();
+            return;
+        }
+        Node* cur = head;
+        for (int i = 1; i < pos - 1 && cur->next; ++i) {
+            cur = cur->next;
+        }
+        if (!cur->next) {
+            cout << "Position out of bounds.\n";
+            return;
+        }
+        Node* tmp = cur->next;
+        cur->next = tmp->next;
+        delete tmp;
+    }
+
+    // 4. Traversal
+    void traverse() const {
+        Node* cur = head;
+        cout << "List: ";
+        while (cur) {
+            cout << cur->data << " ";
+            cur = cur->next;
+        }
+        cout << "\n";
+    }
+};
+
+int main() {
+    SinglyLinkedList list;
+
+    // Creation via append
+    list.append(10);
+    list.append(20);
+    list.append(30);
+    list.traverse();  // List: 10 20 30
+
+    // Insertions
+    list.insertAtBeginning(5);
+    list.append(40);
+    list.insertAtPosition(25, 4);
+    list.traverse();  // List: 5 10 20 25 30 40
+
+    // Deletions
+    list.deleteFromBeginning();
+    list.deleteFromEnd();
+    list.deleteAtPosition(3);
+    list.traverse();  // List: 10 20 30
+
+    return 0;
+}
