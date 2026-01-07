@@ -1,0 +1,41 @@
+import java.sql.
+
+public class CreateDB (
+
+public static void main(String[] args) { try [
+
+//Load MySQL. Driver
+
+Class.forName("com.mysql.cj.jdbc.Driver");
+
+// Establish Connection
+
+Connection cn = DriverManager getConnection( "jdbc:mysql://localhost:3306/?useSSL=false&server Timezone UTC",
+
+"root",
+
+"siddhant 2503"
+
+// Create Statement
+
+Statement stmt = cn.createStatement():
+
+// SQL Query
+
+String sql = "CREATE DATABASE mydb",
+
+stmt.executeUpdate(sql);
+
+System.out.println("Database created successfully!"):
+
+// Close resources
+
+stmt.close();
+
+cn.close();
+
+} catch (Exception e) {
+
+System.out.println(e);
+
+}
