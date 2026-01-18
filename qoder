@@ -1,0 +1,203 @@
+Here are the prompts for **Crafty**, strictly formatted to be copied one by one. Each preserves the specific details and features from your original blueprint while staying under the 950-character limit.
+
+### Prompt 0: Context & Plan
+
+*Copy this first to set the stage for your AI agent.*
+
+```text
+Project Name: Crafty
+Goal: Build a full-stack web app with a "Claymorphism" UI, robust Auth, Admin controls, and a flexible AI backend (Gemini + Local fallback).
+
+I will provide the detailed blueprint in 9 distinct prompts (phases) to accommodate character limits. Do not generate code yet; simply acknowledge and store the requirements until all 9 parts are received.
+
+The 9 Phases are:
+1. Visual Theme (Claymorphism Style)
+2. Authentication & Security (SSO, MFA)
+3. User Dashboard & Interactions
+4. User Settings & Accessibility
+5. Admin Panel (Users & Content)
+6. Admin Panel (AI Config & Analytics)
+7. AI Engine Integration (Gemini + Local)
+8. Tech Stack (Frontend/Backend/DB)
+9. Infrastructure & DevOps
+
+Please confirm you understand this structure and are ready for Prompt 1.
+
+```
+
+---
+
+### Prompt 1: Visual Theme
+
+*Focuses on the specific design language.*
+
+```text
+[Phase 1: Visual Theme]
+The app's theme is Claymorphism: soft, clay-like 3D elements with thick outlines, pastel colors, and gentle shadows.
+- Shapes: Elements use large border radii (>50% of height) to look "puffy."
+- Depth: Use double shadows (one light top-left, one dark bottom-right) to create volume.
+- Example: A button might have a pale teal fill, bright contrasting outline, and subtle inner/outer shadows.
+- Dark Mode: Use deep gray tones (glossy/black), never pure black, so inner shadows remain visible.
+- Animations: Reinforce tactile feel. Buttons should "squash and stretch" slightly on press or anticipate movement on hover.
+- Transitions: Use smooth easing (slow-in/slow-out).
+- Vibe: Playful, friendly, minimal flat surfaces, pronounced curvature.
+
+```
+
+---
+
+### Prompt 2: Authentication
+
+*Focuses on login flows and security features.*
+
+```text
+[Phase 2: Authentication]
+Implement a flexible, high-trust auth system.
+1. Methods:
+   - Social/SSO: "Log in with Google" (OAuth). Label clearly ("We’ll never post...").
+   - Standard: Email/Username + Password with separate or combined forms.
+   - Passwordless: Support Magic Links or OTPs.
+2. MFA: Implement Multi-Factor Auth (TOTP app or SMS). Users can toggle this in Settings. Highlight that MFA blocks ~99.9% of attacks.
+3. Flow: Show progress (e.g., "Sending code..."), handle errors inline, and provide "Forgot Password" flows.
+4. Corporate: Support Google Workspace SSO filtering (allow only specific domains).
+5. UX: Collect minimal info (email only) on signup to reduce drop-off. Display SSL icons and Terms links visibly for trust.
+
+```
+
+---
+
+### Prompt 3: Dashboard & UX
+
+*Focuses on the main user interface and interaction design.*
+
+```text
+[Phase 3: User Dashboard & Experience]
+1. Dashboard: A personalized "Command Center" showing account status, activity, and quick links. Use widgets (e.g., Chart.js) for metrics.
+2. AI Interface: If AI-driven, the main UI is a chat view: large rounded text area, pill-shaped "Send" button, and scrollable history panel. Apply Claymorphism (soft inner shadows) here.
+3. Sections: Notifications, Activity Feed, Search/Filter controls.
+4. Micro-interactions:
+   - Hover/Press: Elements animate (rise, darken, or squash).
+   - Click: A "Submit" button might gently grow and invert shadow direction.
+   - Motion: Purposeful and smooth (e.g., a loading spinner bounces subtly; modals fade and slide in). Follow "Squash and Stretch" principles.
+
+```
+
+---
+
+### Prompt 4: Settings & Accessibility
+
+*Focuses on user control and inclusivity.*
+
+```text
+[Phase 4: Profile & Accessibility]
+1. Profile Page ("My Account"):
+   - Fields: Name, photo, email, password, notification preferences.
+   - Logic: Group fields logically. Require confirmation for password changes.
+2. Localization: Include a language picker (globe icon) for international users.
+3. Accessibility (WCAG):
+   - Contrast: Ensure pastel Claymorphism colors meet high-contrast standards (use darker text/outlines if needed).
+   - Tech: Support screen readers (ARIA labels) and keyboard navigation with visible focus states.
+   - Goal: Usability for all users, regardless of device or ability.
+
+```
+
+---
+
+### Prompt 5: Admin Panel (Part 1)
+
+*Focuses on managing users and content.*
+
+```text
+[Phase 5: Admin Panel - Core Management]
+Design a functional, clean Admin Panel (utilitarian or simplified Claymorphism).
+1. User Management:
+   - List View: Pagination, search, and filters.
+   - Edit: Click user to modify username, email, role, status.
+   - Actions: Create user, Delete user, Reset password.
+   - RBAC: Role-Based Access Control so admins see only authorized sections.
+2. Content Management:
+   - CRUD interfaces for dynamic content (FAQs, Articles).
+   - Editor: WYSIWYG or form-based fields (no coding required).
+   - Safety: Version control or drafts for critical pages.
+
+```
+
+---
+
+### Prompt 6: Admin Panel (Part 2)
+
+*Focuses on system configuration and logs.*
+
+```text
+[Phase 6: Admin Panel - System & Config]
+1. AI Settings: Configure the AI engine. Admins select the provider (Gemini vs. Local), set model names, and tune params (temperature, max tokens). Store in a config DB.
+2. Security & Audit:
+   - Audit Log: Track who changed what and when.
+   - Controls: Manage API keys, OAuth IDs, and toggle Staff 2FA.
+   - Enforcement: All admin actions must be verified server-side.
+3. Integrations: Configure webhooks/keys for external services (Email/SMS). Show sync status.
+4. Dashboard: Visual metrics (user growth, system health) and real-time error alerts.
+5. UX: Persistent sidebar/header. Use modals for quick edits to avoid reloads.
+
+```
+
+---
+
+### Prompt 7: AI Integration
+
+*Focuses on the Gemini engine and local fallback architecture.*
+
+```text
+[Phase 7: AI Engine Architecture]
+1. Core Engine: Google Gemini via the official GenAI SDK (Node/Python).
+   - Features: Async calls, streaming responses for gradual text display.
+2. Flexible Provider System:
+   - The backend must be model-agnostic.
+   - Logic: Read "Active Provider" from Admin Config at runtime to route queries (Gemini vs. Local) without redeploying code.
+3. Local Fallback:
+   - Support LocalAI or Ollama (GGUF models) via Docker.
+   - The backend treats local URLs just like external API endpoints.
+   - Benefit: Privacy and offline capability.
+4. Reliability: Catch API errors (downtime) and disable AI features gracefully. Log queries for monitoring/fine-tuning (if privacy allows).
+
+```
+
+---
+
+### Prompt 8: Tech Stack
+
+*Focuses on the recommended languages and frameworks.*
+
+```text
+[Phase 8: Technology Stack]
+1. Frontend:
+   - Framework: React (TypeScript) or Next.js for SEO/Performance.
+   - Styling: Tailwind CSS or SCSS to implement custom Claymorphism (border-radius, shadows).
+   - Design: Mobile-responsive (flexible layouts, large tap targets).
+2. Backend:
+   - Options: Node.js (Express/Nest) for MERN stack, or Python (FastAPI/Django) for heavy ML/AI work.
+   - Language: TypeScript recommended for Node.
+3. Database:
+   - Structured: SQL (PostgreSQL/MySQL) with ORM (Prisma/TypeORM/Django) for users/settings.
+   - Unstructured: NoSQL (MongoDB/Firestore) for chat logs or high-volume session data.
+   - Optimizations: Index common search fields (email, timestamps).
+
+```
+
+---
+
+### Prompt 9: Infrastructure
+
+*Focuses on deployment, DevOps, and security.*
+
+```text
+[Phase 9: Infrastructure & DevOps]
+1. Containerization: Use Docker for consistent Dev/Prod environments.
+2. Orchestration: Kubernetes or Docker Swarm for scaling. Start with Cloud Run/AWS ECS for simplicity.
+3. CI/CD: Use Git (GitHub Actions) to run tests, build containers, and deploy on push.
+4. Auth Libraries: Passport.js or AllAuth (OAuth 2.0). Use secure cookies or JWTs.
+5. API: Expose RESTful or GraphQL endpoints.
+6. Security: Sanitize all inputs, enforce CORS, use CSRF protection. Implement server-side permission checks on every API call.
+7. Performance: Lazy-load components, paginate data, cache frequent queries, and optimize images (SVG/PNG).
+
+```
